@@ -24,13 +24,17 @@ public class App {
         try {
             session.beginTransaction();
 
-            Person person1 = new Person("Tommy Lee Jones", 98);
-            Item newItem = new Item("Skovoroda", person1);
+            Person person = session.get(Person.class, 3);
+            List<Item> items = person.getItems();
 
-            person1.setItems(new ArrayList<>(Collections.singletonList(newItem)));
+            System.out.println(items);
 
-            session.save(person1);
-            session.save(newItem);
+            for (Item item : items) {
+                session.remove(item);
+            }
+            System.out.println(items);
+
+            person.getItems().clear();
 
             session.getTransaction().commit();
         } finally {
