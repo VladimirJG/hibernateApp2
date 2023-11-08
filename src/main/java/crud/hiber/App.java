@@ -24,17 +24,9 @@ public class App {
         try {
             session.beginTransaction();
 
-            Person person = session.get(Person.class, 3);
-            List<Item> items = person.getItems();
-
-            System.out.println(items);
-
-            for (Item item : items) {
-                session.remove(item);
-            }
-            System.out.println(items);
-
-            person.getItems().clear();
+            Person person = session.get(Person.class, 2);
+            session.remove(person);
+            person.getItems().forEach(i -> i.setOwner(null));
 
             session.getTransaction().commit();
         } finally {
