@@ -21,17 +21,12 @@ public class App {
 
         try {
             session.beginTransaction();
-            Person person = session.get(Person.class,3);
-            System.out.println(person);
+            Person person = session.get(Person.class, 2);
+            Item item = new Item("NewItem", person);
 
-            List<Item> items = person.getItems();
-            System.out.println(items);
-            System.out.println("======================================================");
+            person.getItems().add(item);
 
-            Item item = session.get(Item.class,4);
-            System.out.println(item);
-            Person owner = item.getOwner();
-            System.out.println(owner);
+            session.save(item);
 
             session.getTransaction().commit();
         } finally {
