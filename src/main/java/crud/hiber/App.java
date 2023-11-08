@@ -25,14 +25,14 @@ public class App {
             session.beginTransaction();
 
             Person person = new Person("Cascading test222", 30);
+            person.addItem(new Item("Test cascading item5555"));
+            person.addItem(new Item("Test cascading item8888"));
+            person.addItem(new Item("Test cascading item7777"));
 
-            Item item = new Item("Test cascading item2222", person);
-
-            person.setItems(new ArrayList<>(Collections.singletonList(item)));
 
             session.save(person);
 
-//            session.save(item);
+
             session.getTransaction().commit();
         } finally {
             sessionFactory.close();
