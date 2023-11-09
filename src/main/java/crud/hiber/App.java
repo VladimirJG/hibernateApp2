@@ -2,6 +2,7 @@ package crud.hiber;
 
 import crud.hiber.model.Item;
 import crud.hiber.model.Person;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -37,10 +38,13 @@ public class App {
             Person person = session.get(Person.class,1);
             System.out.println(person.getItems());
 
-
+            Hibernate.initialize(person.getItems());
 
 
             session.getTransaction().commit();
+
+            System.out.println("without session");
+            System.out.println(person.getItems());
         } finally {
             sessionFactory.close();
         }
