@@ -35,16 +35,24 @@ public class App {
 
 //            222
 
-            Person person = session.get(Person.class,1);
+            Person person = session.get(Person.class, 1);
             System.out.println(person.getItems());
-
-            Hibernate.initialize(person.getItems());
 
 
             session.getTransaction().commit();
 
             System.out.println("without session");
+
+            session = sessionFactory.getCurrentSession();
+            session.beginTransaction();
+
+            person = (Person) session.merge(person);
+            Hibernate.initialize(person.getItems());
+            session.getTransaction().commit();
+//session.close();
+
             System.out.println(person.getItems());
+
         } finally {
             sessionFactory.close();
         }
