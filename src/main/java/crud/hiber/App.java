@@ -24,13 +24,20 @@ public class App {
         try {
             session.beginTransaction();
 
-            Person person = new Person("Cascading test222", 30);
+          /*  Person person = new Person("Cascading test222", 30);
             person.addItem(new Item("Test cascading item5555"));
             person.addItem(new Item("Test cascading item8888"));
             person.addItem(new Item("Test cascading item7777"));
 
 
-            session.save(person);
+            session.save(person);*/
+
+//            222
+
+            Person person = session.get(Person.class,1);
+            System.out.println(person.getItems());
+
+
 
 
             session.getTransaction().commit();
